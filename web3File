@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Monad Growth Visualizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #uploadedImage, #resultContainer {
+            max-width: 100%;
+            margin-top: 1rem;
+        }
+        #resultContainer {
+            display: flex;
+            justify-content: space-around;
+        }
+        .resultImage {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Web3 Monad Growth Visualizer</h1>
+        <input type="file" id="imageUpload" accept="image/*">
+        <div id="uploadedImage"></div>
+        <button onclick="processImage()">Generate Growth Stages</button>
+        <div id="resultContainer"></div>
+    </div>
+
+    <script>
+        function processImage() {
+            const file = document.getElementById('imageUpload').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedImage').innerHTML = `<img src="${e.target.result}" style="max-width: 200px;">`;
+                    generateGrowthStages(e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function generateGrowthStages(originalImage) {
+            // This is where you'd implement or call an API for the AI image processing
+            // For this example, we'll just duplicate the image
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const img = document.createElement('img');
+                img.src = originalImage;
+                img.classList.add('resultImage');
+                resultContainer.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
